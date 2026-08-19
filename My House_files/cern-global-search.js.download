@@ -1,0 +1,17 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.querySelector('form[role="search"]');
+
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const input = searchForm.querySelector('input[name="s"]');
+            const query = input ? input.value.trim() : '';
+
+            if (query !== '') {
+                // Redirect to search results page with GET param
+                window.location.href = `/?s=${encodeURIComponent(query)}`;
+            }
+        });
+    }
+});

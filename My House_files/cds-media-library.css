@@ -1,0 +1,110 @@
+.cds-container {
+    margin: 20px auto 0;
+    width: 360px;
+    position: relative;
+    z-index: 1;
+
+    input[type='text'] {
+        width: 100%;
+        margin: 10px 0;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 2px hwb(0deg 0% 100% / 10%);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#cds-upload-spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: calc(150px + 50%);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.cern-spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.hidden-content * {
+    visibility: hidden;
+}
+
+.media-sidebar .attachment-details .attachment-preview {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media-sidebar .attachment-details .thumbnail {
+    background: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+.media-sidebar .attachment-details .thumbnail .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+.media-sidebar .attachment-details .thumbnail img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+[data-cds='true'] .edit-attachment,
+[data-cds='true'] .button-link[href*='action=edit'],
+[data-cds='true'] .edit-image-btn,
+[data-cds='true'] .edit-selection,
+[data-cds='true'] .attachment-actions .edit-attachment {
+    display: none !important;
+}
+
+.has-cds-media-flag {
+    position: relative;
+}
+
+.cds-media-flag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 3;
+    background: #0053a6;
+    color: #fff;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    pointer-events: none;
+}

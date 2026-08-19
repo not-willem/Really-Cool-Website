@@ -1,0 +1,111 @@
+/**
+ * We have to use a mask to avoid using !important to override the WordPress overlay 
+ * element's background. We could also use a background-image, but then the user's
+ * overlay colour and opacity slider would not work as normal. The current solution 
+ * only really works because we are hiding the preview panel rendering of the block.
+ */
+
+.wp-block-cover[class*='is-style-cern-cover-overlay-']
+    .wp-block-cover__background.has-background-dim,
+.wp-block-cover[class*='is-style-cern-cover-overlay-']
+    .wp-block-cover__gradient-background.has-background-dim,
+.wp-block-cover[class*='is-style-cern-cover-overlay-'].has-background-dim:not(
+        .has-background-gradient
+    )::before {
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+.wp-block-cover.is-style-cern-cover-overlay-left
+    .wp-block-cover__background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-left
+    .wp-block-cover__gradient-background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-left.has-background-dim:not(
+        .has-background-gradient
+    )::before {
+    -webkit-mask-image: linear-gradient(
+        to right,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+    mask-image: linear-gradient(
+        to right,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+}
+
+.wp-block-cover.is-style-cern-cover-overlay-right
+    .wp-block-cover__background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-right
+    .wp-block-cover__gradient-background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-right.has-background-dim:not(
+        .has-background-gradient
+    )::before {
+    -webkit-mask-image: linear-gradient(
+        to left,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+    mask-image: linear-gradient(
+        to left,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+}
+
+.wp-block-cover.is-style-cern-cover-overlay-top
+    .wp-block-cover__background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-top
+    .wp-block-cover__gradient-background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-top.has-background-dim:not(
+        .has-background-gradient
+    )::before {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+}
+
+.wp-block-cover.is-style-cern-cover-overlay-bottom
+    .wp-block-cover__background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-bottom
+    .wp-block-cover__gradient-background.has-background-dim,
+.wp-block-cover.is-style-cern-cover-overlay-bottom.has-background-dim:not(
+        .has-background-gradient
+    )::before {
+    -webkit-mask-image: linear-gradient(
+        to top,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+    mask-image: linear-gradient(
+        to top,
+        #000 0%,
+        #000 28%,
+        rgba(0, 0, 0, 0.65) 48%,
+        transparent 78%
+    );
+}

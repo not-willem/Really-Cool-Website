@@ -1,0 +1,27 @@
+(function () {
+    const icon =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" style="vertical-align: middle; fill: currentColor;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>';
+
+    const modifyLink = (link) => {
+        const onlyHasSpan =
+            link.children.length === 1 &&
+            link.children[0].tagName.toLowerCase() === 'span';
+        const onlyContainsText =
+            link.children.length === 0 && link.textContent.trim().length > 0;
+
+        const textWithMailtoLink = onlyHasSpan || onlyContainsText;
+
+        if (link.href.startsWith('mailto:') && textWithMailtoLink) {
+            link.innerHTML = link.innerHTML + ' ' + icon;
+        }
+    };
+
+    function addMailtoLinkIcons() {
+        const content =
+            document.querySelector('.wp-sites-blocks') || document.body;
+        const links = content.querySelectorAll('a');
+
+        links.forEach(modifyLink);
+    }
+    window.addEventListener('DOMContentLoaded', addMailtoLinkIcons, false);
+})();

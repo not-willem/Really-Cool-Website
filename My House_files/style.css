@@ -1,0 +1,430 @@
+/*
+Theme Name: CERN
+Author: CERN Web Team
+Author URI: https://home.cern
+Description: The officially-distributed theme for WordPress sites at CERN.
+Version: 3.33.1 
+*/
+
+:root {
+    --content-width: 1200px;
+    --transition-duration: 150ms;
+}
+
+.wp-block-group > .wp-block-group > .entry-content > .alignfull {
+    margin-right: calc(var(--wp--preset--spacing--20) * -1);
+    margin-left: calc(var(--wp--preset--spacing--20) * -1);
+}
+
+.wp-block-template-part {
+    margin-top: 0 !important;
+}
+
+a:where(:not(.wp-element-button, .wp-block-heading a)) {
+    color: inherit;
+    transition: color var(--transition-duration) ease;
+
+    &:hover {
+        color: var(--wp--preset--color--blue-300);
+    }
+}
+
+a[data-type='link']:where(:not(.wp-element-button, .wp-block-heading a)) {
+    text-decoration: underline;
+
+    &,
+    &:visited {
+        color: inherit !important;
+    }
+}
+
+.wp-block {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-site-blocks {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    main {
+        flex-grow: 1;
+    }
+}
+
+/* Mobile override */
+@media (width <=960px) {
+    :root {
+        --wp--style--global--content-size: 100vw !important;
+        --wp--style--global--wide-size: 100vw !important;
+        --content-width: 100vw !important;
+    }
+
+    html,
+    body {
+        overflow-x: hidden;
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #page {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
+        max-width: 100% !important;
+    }
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.wp-block-buttons.alignfull .wp-block-button__width-100 div {
+    border-radius: 0 !important;
+}
+
+/* Display youtube embed on frontend as on editor */
+/* stylelint-disable-next-line selector-class-pattern */
+.wp-block-embed-youtube .wp-block-embed__wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    height: 0;
+    overflow: hidden;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.wp-block-button > .wp-block-button__link {
+    border: 0 !important;
+    padding: 12px 16px !important;
+}
+
+/* Temporary button styling locations */
+.wp-block-button > .wp-block-button__link.has-black-background-color,
+.wp-block-button > .wp-block-button__link {
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--black);
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+        background-color: white !important;
+        color: var(--wp--preset--color--black) !important;
+    }
+}
+
+.wp-block-button > .wp-block-button__link.has-blue-400-background-color {
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--blue-400);
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+        background-color: white !important;
+        color: var(--wp--preset--color--blue-400) !important;
+    }
+}
+
+.wp-block-button > .wp-block-button__link.has-orange-background-color {
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--orange);
+    &:focus,
+    &:hover,
+    &:focus-within {
+        background-color: white !important;
+        color: var(--wp--preset--color--orange) !important;
+    }
+}
+
+.wp-block-button > .wp-block-button__link.has-white-background-color {
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--white);
+    color: var(--wp--preset--color--blue-400) !important;
+    &:focus,
+    &:hover,
+    &:focus-within {
+        background-color: transparent !important;
+        color: var(--wp--preset--color--white) !important;
+    }
+}
+
+.wp-block-button > .wp-block-button__link.has-purple-500-background-color {
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--purple-500);
+    &:focus,
+    &:hover,
+    &:focus-within {
+        background-color: white !important;
+        color: var(--wp--preset--color--purple-500) !important;
+    }
+}
+.wp-block-button.is-style-outline > .wp-block-button__link,
+.wp-block-button.is-style-outline
+    > .wp-block-button__link.has-black-background-color {
+    background-color: var(--wp--preset--color--white) !important;
+    color: var(--wp--preset--color--black) !important;
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--black);
+    border: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        box-shadow: 0 0 0 0px var(--wp--preset--color--black);
+        background-color: var(--wp--preset--color--black) !important;
+        color: var(--wp--preset--color--white) !important;
+    }
+}
+
+.wp-block-button.is-style-outline
+    > .wp-block-button__link.has-purple-500-background-color {
+    background-color: var(--wp--preset--color--white) !important;
+    color: var(--wp--preset--color--purple-500) !important;
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--purple-500);
+    border: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        box-shadow: 0 0 0 0px var(--wp--preset--color--purple-500);
+        background-color: var(--wp--preset--color--purple-500) !important;
+        color: var(--wp--preset--color--white) !important;
+    }
+}
+
+.wp-block-button.is-style-outline
+    > .wp-block-button__link.has-white-background-color {
+    background-color: transparent !important;
+    color: var(--wp--preset--color--white) !important;
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--white);
+    border: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        box-shadow: 0 0 0 0px var(--wp--preset--color--white);
+        background-color: var(--wp--preset--color--white) !important;
+        color: var(--wp--preset--color--blue-400) !important;
+    }
+}
+
+.wp-block-button.is-style-outline
+    > .wp-block-button__link.has-orange-background-color {
+    background-color: var(--wp--preset--color--white) !important;
+    color: var(--wp--preset--color--orange) !important;
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--orange);
+    border: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        box-shadow: 0 0 0 0px var(--wp--preset--color--orange);
+        background-color: var(--wp--preset--color--orange) !important;
+        color: var(--wp--preset--color--white) !important;
+    }
+}
+
+.wp-block-button.is-style-outline
+    > .wp-block-button__link.has-blue-400-background-color {
+    background-color: var(--wp--preset--color--white) !important;
+    color: var(--wp--preset--color--blue-400) !important;
+    box-shadow: 0 0 0 1.5px var(--wp--preset--color--blue-400);
+    border: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        box-shadow: 0 0 0 0px var(--wp--preset--color--white);
+        background-color: var(--wp--preset--color--blue-400) !important;
+        color: var(--wp--preset--color--white) !important;
+    }
+}
+
+/* Match editor styling for the Featured image caption (core/post-featured-image). */
+.wp-block-post-featured-image figcaption.wp-element-caption {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--wp--preset--color--gray-400);
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+}
+
+/* stylelint-enable selector-class-pattern */
+
+#header-container {
+    margin-block-start: 0;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.wp-block-heading {
+    a {
+        color: inherit;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+    }
+    a:hover {
+        transform: translateY(-1px);
+    }
+    a:hover::after,
+    a:focus::after,
+    a:focus-within::after {
+        width: 100%;
+    }
+    a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -0.5px;
+        width: 0;
+        height: 1.5px;
+        background-color: var(--wp--preset--color--blue-300);
+        transition: width 0.3s ease;
+    }
+
+    &[data-underline-color='orange'] a::after {
+        background-color: var(--wp--preset--color--orange-400);
+    }
+}
+
+/** * Font size and line height adjustments for headings and text.
+ * These ensure consistent spacing and readability across different font sizes.
+ * Only applied here until THEME.JSON supports line-height for font size presets. 
+ * TODO: Move to THEME.JSON when supported.
+ */
+
+.has-heading-2x-large-font-size {
+    line-height: 72px;
+}
+
+.has-heading-x-large-font-size {
+    line-height: 64px;
+}
+
+.has-heading-large-font-size {
+    line-height: 56px;
+}
+
+.has-heading-medium-font-size {
+    line-height: 48px;
+}
+
+.has-heading-small-font-size {
+    line-height: 40px;
+}
+
+.has-heading-x-small-font-size {
+    line-height: 30px;
+}
+
+h1,
+h2,
+h1.wp-block-heading,
+h2.wp-block-heading,
+.wp-block-heading.has-heading-2-x-large-font-size,
+.wp-block-heading.has-heading-x-large-font-size {
+    @media (width < 768px) {
+        font-size: 32px !important;
+        line-height: 40px;
+    }
+}
+
+h3,
+h4,
+h5,
+h3.wp-block-heading,
+h4.wp-block-heading,
+h5.wp-block-heading,
+.wp-block-heading.has-heading-large-font-size,
+.wp-block-heading.has-heading-medium-font-size,
+.wp-block-heading.has-heading-small-font-size {
+    @media (width < 768px) {
+        font-size: 24px !important;
+        line-height: 32px;
+    }
+}
+
+.has-xx-large-font-size {
+    line-height: 56px;
+    @media (width < 768px) {
+        font-size: 20px !important;
+        line-height: 28px;
+    }
+}
+
+.has-x-large-font-size {
+    line-height: 40px;
+    @media (width < 768px) {
+        font-size: 16px !important;
+        line-height: 24px;
+    }
+}
+
+.has-large-font-size {
+    line-height: 32px;
+    @media (width < 768px) {
+        font-size: 16px !important;
+        line-height: 24px;
+    }
+}
+
+.has-medium-font-size {
+    line-height: 20px;
+    @media (width < 768px) {
+        font-size: 14px !important;
+        line-height: 22px;
+    }
+}
+
+.has-small-font-size {
+    line-height: 16px;
+}
+
+p,
+li,
+td,
+th {
+    @media (width < 768px) {
+        font-size: 16px !important;
+        line-height: 24px;
+    }
+}
+
+.wp-block-table img {
+    max-width: 100%;
+    height: auto;
+}
+
+.editor-visual-editor__post-title-wrapper.edit-post-visual-editor__post-title-wrapper.has-global-padding,
+.components-base-control.components-textarea-control.wp-block.wp-block-post-title.block-editor-block-list__block.editor-post-title.editor-post-title__input {
+    display: none;
+}
+
+sub,
+sup {
+    line-height: 0;
+}
+
+/* Users that haven't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}

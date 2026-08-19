@@ -1,0 +1,156 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const fill = document.getElementById('cern-progress-bar-fill');
+    const bar = document.getElementById('cern-progress-bar');
+    const barContainer = document.getElementById('cern-progress-bar-container');
+    if (!fill || !bar) return;
+
+    const headings = Array.from(document.querySelectorAll('main h2'));
+    const footer = document.querySelector('footer');
+    const header = document.getElementById('header-container');
+    const totalSections = headings.length;
+
+    if (totalSections === 0) {
+        barContainer.style.display = 'none';
+        return;
+    }
+
+    headings.forEach((heading, index) => {
+        if (!heading.id) {
+            heading.id = 'section-' + index;
+        }
+
+        const markerWrapper = document.createElement('div');
+        markerWrapper.classList.add('progress-marker-wrapper');
+
+        const marker = document.createElement('div');
+        marker.classList.add('progress-marker');
+
+        heading._marker = marker;
+
+        const labelContainer = document.createElement('div');
+        labelContainer.classList.add('progress-label-container');
+
+        const label = document.createElement('a');
+        label.classList.add('progress-label');
+        label.href = '#' + heading.id;
+        label.textContent = heading.textContent;
+
+        const gapProcent = (100 / (totalSections + 1)) * (index + 1);
+
+        markerWrapper.style.top = gapProcent + '%';
+
+        labelContainer.appendChild(label);
+        markerWrapper.appendChild(marker);
+        markerWrapper.appendChild(labelContainer);
+        fill.appendChild(markerWrapper);
+    });
+
+    const sections = headings.map((h, index) => ({
+        id: h.id,
+        markerWrapper: fill.children[index],
+    }));
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -95% 0px',
+        scrollMargin: '150px 0px 150px 0px',
+        threshold: 0.01,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const index = sections.findIndex(
+                    (s) => s.id === entry.target.id
+                );
+
+                const fillPercent =
+                    index == totalSections - 1
+                        ? 100
+                        : (100 / (totalSections + 1)) * (index + 1);
+
+                fill.style.height = fillPercent + '%';
+
+                headings.forEach((h, i) => {
+                    if (i <= index) h._marker.classList.add('active');
+                    else h._marker.classList.remove('active');
+                });
+            }
+        });
+    }, observerOptions);
+
+    headings.forEach((h) => observer.observe(h));
+
+    function onScrollOrResize() {
+        const scrollTop = window.scrollY;
+        const scrollableHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+        const windowHeight = window.innerHeight;
+
+        if (scrollTop >= scrollableHeight - 1) {
+            fill.style.height = '100%';
+            headings.forEach((h) => h._marker.classList.add('active'));
+        }
+
+        const footerRect = footer.getBoundingClientRect();
+        const headerRect = header.getBoundingClientRect();
+
+        const headerAndFooterInView =
+            headerRect.bottom >= 0 && footerRect.top < windowHeight;
+        const footerInView = footerRect.top < windowHeight;
+        const headerInView = headerRect.bottom >= 0;
+
+        const headerHeight = parseFloat(window.getComputedStyle(header).height);
+        const footerHeight = parseFloat(window.getComputedStyle(footer).height);
+
+        const headertopOffset = headerRect.top;
+        const footerbottomOffset = footerRect.bottom;
+
+        if (headerAndFooterInView) {
+            const offset = windowHeight - footerRect.top;
+            const vh = window.innerHeight * 0.89;
+            const height = vh - offset;
+            barContainer.style.height = `${height}px`;
+            barContainer.style.bottom = `${footerHeight + footerbottomOffset}px`;
+            barContainer.style.top = `${headerHeight + headertopOffset}px`;
+        } else if (footerInView) {
+            const offset = windowHeight - footerRect.top;
+            barContainer.style.bottom = `${offset + 10}px`;
+            barContainer.style.top = 'auto';
+            barContainer.style.height =
+                'calc(100vh - ' + footerbottomOffset.bottom + ')';
+        } else if (headerInView) {
+            barContainer.style.top = `${headerHeight + headertopOffset}px`;
+            barContainer.style.bottom = 'auto';
+        } else {
+            barContainer.style.bottom = '10px';
+            barContainer.style.top = '10px';
+            barContainer.style.height = 'calc(100vh - 20px)';
+            if (headerRect.top >= windowHeight) {
+                // barContainer.style.top = '120px';
+            }
+        }
+    }
+
+    let ticking = false;
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                try {
+                    onScrollOrResize();
+                } finally {
+                    ticking = false;
+                }
+            });
+            ticking = true;
+        }
+    }
+
+    const body = document.querySelector('body');
+    body.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick, { passive: true });
+    window.addEventListener('load', () => {
+        requestAnimationFrame(onScrollOrResize);
+    });
+});

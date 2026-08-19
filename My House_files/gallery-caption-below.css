@@ -1,0 +1,58 @@
+/*
+ * When the "Crop images" setting is enabled on the gallery, WordPress adds inline
+ * styles and classes that we need to override to make the caption visible.
+ * This section resets those styles.
+ */
+.is-style-gallery-caption-below.wp-block-gallery.is-cropped .wp-block-image {
+    height: auto !important;
+    flex-basis: auto !important;
+    overflow: visible !important;
+}
+
+.is-style-gallery-caption-below.wp-block-gallery.is-cropped
+    .wp-block-image
+    img {
+    height: auto !important;
+    object-fit: initial !important;
+}
+
+/*
+ * This is the main rule to stack the image and caption vertically.
+ */
+.is-style-gallery-caption-below.wp-block-gallery .wp-block-image {
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+ * This section styles the caption itself.
+ * We force its position to be static, which takes it out of the image overlay.
+ * We also remove the background gradient (the "blur effect") and other visual styles.
+ */
+.is-style-gallery-caption-below.wp-block-gallery .wp-block-image figcaption {
+    position: static !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: inherit !important;
+    width: 100% !important;
+    padding: 0.5em 0 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    text-shadow: none !important;
+}
+
+/*
+ * Color variants for the caption text. The selector for the caption is different from 
+ * the block style variant class.
+ */
+.wp-block-gallery.has-nested-images.is-style-caption-black
+    figure.wp-block-image
+    figcaption {
+    color: var(--wp--preset--color--black);
+}
+
+.wp-block-gallery.has-nested-images.is-style-caption-white
+    figure.wp-block-image
+    figcaption {
+    color: var(--wp--preset--color--white);
+}
